@@ -1,10 +1,29 @@
-import "./App.css";
-import UserManagement from "./components/UserManagement";
+import React from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { AddUser } from "./features/users/AddUser";
+import { EditUser } from "./features/users/EditUser";
+import { UserList } from "./features/users/UserList";
+import store from "./store";
+
 function App() {
   return (
-    <div className="app">
-      <UserManagement />
-    </div>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Switch>
+            <Route path="/add-user">
+              <AddUser />
+            </Route>
+            <Route path="/edit-user">
+              <EditUser />
+            </Route>
+            <Route path="/">
+              <UserList />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
