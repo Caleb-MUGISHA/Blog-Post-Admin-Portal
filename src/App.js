@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { AddUser } from "./features/users/AddUser";
 import { EditUser } from "./features/users/EditUser";
 import { UserList } from "./features/users/UserList";
+import { Provider } from "react-redux";
 import store from "./store";
 
 function App() {

@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import {
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE,
+} from "./userTypes";
 export const fetchUsers = () => {
   return (dispatch) => {
     dispatch(fetchUsersRequest());
@@ -37,7 +42,7 @@ export const fetchUsersFailure = (error) => {
   };
 };
 
-const usersSlice = createSlice({
+const userSlice = createSlice({
   name: "users",
   initialState: {
     entities: [],
@@ -77,6 +82,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const { userAdded, userUpdated, userDeleted } = usersSlice.actions;
+export const { userAdded, userUpdated, userDeleted } = userSlice.actions;
 
-export default usersSlice.reducer;
+export default userSlice.reducer;
