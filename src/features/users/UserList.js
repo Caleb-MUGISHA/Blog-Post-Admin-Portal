@@ -2,6 +2,8 @@ import { fetchUsers, userDeleted } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { DataGrid } from "@material-ui/data-grid";
 
 export function UserList() {
   const dispatch = useDispatch();
@@ -12,6 +14,12 @@ export function UserList() {
   const handleDelete = (id) => {
     dispatch(userDeleted({ id }));
   };
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "Name", headerName: "Name", width: 130 },
+    { field: "UserName", headerName: "User Name", width: 130 },
+  ];
+  const rows = [{ id: { id }, Name: { name }, UserName: { username } }];
 
   return (
     <div className="container">
@@ -20,24 +28,29 @@ export function UserList() {
       </div>
       <div className="row">
         <div className="two columns">
-          <button
+          <Button
             onClick={() => dispatch(fetchUsers())}
             className="button-primary"
+            variant="contained"
+            color="primary"
           >
-            Load users
-          </button>
+            Load Users
+          </Button>
         </div>
-        <div className="two columns">
+        <div>
           <Link to="/add-user">
-            <button className="button-primary">Add user</button>
+            <Button variant="contained" color="secondary">
+              Add user
+            </Button>
           </Link>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         {loading ? (
           "Loading..."
         ) : (
           <table className="u-full-width">
+            
             <thead>
               <tr>
                 <th>ID</th>
@@ -64,6 +77,14 @@ export function UserList() {
             </tbody>
           </table>
         )}
+      </div> */}
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+        />
       </div>
     </div>
   );
